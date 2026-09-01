@@ -16,10 +16,11 @@ import streamlit as st
 
 # Configure Streamlit page layout
 st.set_page_config(
-    page_title="RazorGuard | Chargeback Triage Engine",
-    layout="wide",
-    page_icon="🛡️",
+    page_title="RazorGuard | Chargeback Triage Engine", # Plain text here
+    page_icon="⚖️", # Standard emoji for the browser tab
+    layout="wide"
 )
+
 
 # -----------------------------------------------------------------------------
 # CORE BACKEND INFERENCE PIPELINE
@@ -149,7 +150,7 @@ Merchant Risk & Representment Automation Engine (Powered by RazorGuard)
 # -----------------------------------------------------------------------------
 # APPLICATION UI
 # -----------------------------------------------------------------------------
-st.title("🛡️ RazorGuard | AI Chargeback Triage Engine")
+st.title(" RazorGuard | AI Chargeback Triage Engine")
 st.caption("Post-Transaction Risk Management, Cost-Optimal Dispute Triage & Bank Auto-Responder for Indian BFSI Rails")
 
 df_raw = load_or_generate_dataset()
