@@ -32,13 +32,13 @@ RazorGuard decouples statistical prediction from the economic decision utilizing
 
 The system filters incoming disputes and prioritizes them strictly by Expected ROI, discarding margin-burning cases while allowing live CSV data ingestion.
 
-![Dashboard Overview](image_606a3a.jpg)
+![Dashboard Overview](image_606a37.jpg)
 
 1. Honest Unit Economics
 
 RazorGuard tracks its own financial performance, actively calculating Wasted Labor Cost (False Positives), Lost Recoverable Revenue (False Negatives), and Total Net Financial Savings based on rigorous back-testing against 200 test cases.
 
-![Unit Economics Breakdown](image_606a37.jpg)
+![Unit Economics Breakdown](image_606a3a.jpg)
 
 1. Zero-Hallucination Rebuttal Generator
 
