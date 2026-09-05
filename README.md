@@ -38,7 +38,7 @@ The system filters incoming disputes and prioritizes them strictly by Expected R
 
 RazorGuard tracks its own financial performance, actively calculating Wasted Labor Cost (False Positives), Lost Recoverable Revenue (False Negatives), and Total Net Financial Savings based on rigorous back-testing against 200 test cases.
 
-![Unit Economics Breakdown](image_606a3a.jpg)
+![Unit Economics Breakdown](image_606a3b.jpg)
 
 1. Zero-Hallucination Rebuttal Generator
 
@@ -50,9 +50,9 @@ Open-ended LLMs cannot be safely deployed for banking arbitration due to the sev
 
 Compared to a baseline policy of disputing all chargebacks blindly, RazorGuard's cost-optimal threshold delivered the following on a 200-case test set:
 
-- **False Positive Labor Waste:** ₹28,000
-- **False Negative Lost Revenue:** ₹22,209.07
-- **Net Financial Savings:** ₹7,290.93
+- **False Positive Labor Waste:** ₹26,000
+- **False Negative Lost Revenue:** ₹22,852.60
+- **Net Financial Savings:** ₹11,147.40
 
 🚀 How to Run Locally
 
