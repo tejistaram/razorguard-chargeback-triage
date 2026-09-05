@@ -1,4 +1,4 @@
-# # 🛡️ RazorGuard | AI Chargeback Triage Engine
+# #  RazorGuard | AI Chargeback Triage Engine
 
 Razorpay AI Buildathon — Track 02: AI Risk Manager.
 
@@ -26,21 +26,7 @@ RazorGuard decouples statistical prediction from the economic decision utilizing
 
 🛠️ Technical Stack & Architecture
 
-| Component | Technology Used | Purpose |
-
-| :--- | :--- | :--- |
-
-| Frontend / UI | Streamlit | Interactive web dashboard for risk analysts |
-
-| Backend Core | Python 3 | Core application routing and data logic |
-
-| Machine Learning | Scikit-Learn | Training the Random Forest classifier |
-
-| Data Processing | Pandas & NumPy | Expected Value (EMV) financial calculations |
-
-| Visualizations | Plotly Express | Rendering dynamic feature importance charts |
-
-| Compliance | Deterministic JSON | Mapping data to RBI-compliant rebuttal letters safely |
+![Technical Stack]([https://raw.githubusercontent.com/tejistaram/razorguard-chargeback-triage/main/tech_stack.jpg](https://raw.githubusercontent.com/tejistaram/razorguard-chargeback-triage/main/tech_stack.jpg))
 
 📊 Dashboard Visuals & Unit Economics
 
