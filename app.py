@@ -16,11 +16,10 @@ import streamlit as st
 
 # Configure Streamlit page layout
 st.set_page_config(
-    page_title="RazorGuard | Chargeback Triage Engine", # Plain text here
-    page_icon="⚖️", # Standard emoji for the browser tab
+    page_title="RazorGuard | Chargeback Triage Engine",
+    page_icon="⚖️", 
     layout="wide"
 )
-
 
 # -----------------------------------------------------------------------------
 # CORE BACKEND INFERENCE PIPELINE
@@ -31,7 +30,6 @@ def load_or_generate_dataset() -> pd.DataFrame:
     try:
         return pd.read_csv("chargeback_data.csv")
     except FileNotFoundError:
-        st.warning("⚠️ chargeback_data.csv not found. Please run python triage_engine.py first.")
         return pd.DataFrame()
 
 
@@ -64,7 +62,11 @@ def train_model_and_infer(df: pd.DataFrame):
     )
 
     model = RandomForestClassifier(
-        n_estimators=200, max_depth=6, min_samples_leaf=4, random_state=42
+        n_estimators=300, 
+        max_depth=10, 
+        min_samples_leaf=2, 
+        class_weight="balanced", 
+        random_state=42
     )
     model.fit(X_train, y_train)
 
@@ -153,11 +155,23 @@ Merchant Risk & Representment Automation Engine (Powered by RazorGuard)
 st.title(" RazorGuard | AI Chargeback Triage Engine")
 st.caption("Post-Transaction Risk Management, Cost-Optimal Dispute Triage & Bank Auto-Responder for Indian BFSI Rails")
 
-df_raw = load_or_generate_dataset()
+# --- NEW FILE UPLOADER LOGIC ---
+uploaded_file = st.file_uploader("📂 Upload Dispute Data (CSV)", type=["csv"])
+
+if uploaded_file is not None:
+    # Read the live uploaded file
+    df_raw = pd.read_csv(uploaded_file)
+    st.success("✅ Live dispute data ingested successfully!")
+else:
+    # Fallback to the default dataset if no file is uploaded
+    df_raw = load_or_generate_dataset()
+    if not df_raw.empty:
+        st.info("ℹ️ Currently displaying default test batch. Upload a CSV to process new disputes.")
 
 if df_raw.empty:
-    st.error("Please ensure `chargeback_data.csv` is present in your folder.")
+    st.error("⚠️ Data not found! Please upload a valid CSV file or ensure `chargeback_data.csv` is in your folder.")
     st.stop()
+# -------------------------------
 
 test_results, metrics = train_model_and_infer(df_raw)
 

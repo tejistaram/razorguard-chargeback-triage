@@ -1,45 +1,108 @@
-# 🛡️ RazorGuard | AI Chargeback Triage Engine
+# #  RazorGuard | AI Chargeback Triage Engine
 
-**Built for Razorpay Buildathon | Track 02 — AI Risk Manager**
+**Razorpay AI Buildathon — Track 02: AI Risk Manager**
 
-RazorGuard is a cost-optimal chargeback triage and automated representment engine for Indian BFSI payment rails. It protects merchant margins from "friendly fraud" by calculating the exact operational ROI of disputing a chargeback, and automatically drafts RBI/NPCI-compliant rebuttal letters for high-yield cases.
+[![Python 3.9+]([https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/))
 
-## 🚨 The Problem
+[![Streamlit]([https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io))
 
-Merchants lose substantial margins to chargebacks because disputing claims manually costs ~₹500 in operational labor per case. If a merchant fights a ₹350 dispute and wins, they still lose ₹150. Most ML fraud models evaluate pure "accuracy" or use a naive 0.5 probability threshold, completely ignoring unit economics. 
+[![Scikit-Learn]([https://img.shields.io/badge/scikit--learn-%23F7931E.svg?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/))
 
-## 💡 The Solution
+---
 
-RazorGuard replaces standard binary classification with a **Dynamic Cost-Optimal Threshold**. 
+## 🛑 The Core Problem: The Margin-Loss Trap
 
-Instead of fighting every dispute, RazorGuard recommends fighting a case **IF AND ONLY IF**:
+Indian digital merchants face an operational crisis: **the unit economics of dispute representment are fundamentally broken.**
 
-`Expected Value = (Predicted Win Probability × Transaction Amount) > ₹500 Labor Cost`
+Manually compiling evidence and submitting a dispute to an acquiring bank costs an estimated **₹500 in human labor and operational overhead per case**. Standard risk models optimize purely for statistical accuracy ($P_{win} > 0.5$). 
 
-### Core Features
+This creates two fatal business scenarios:
 
-* **Indian BFSI Causal Logic:** The data engine is modeled strictly on domestic realities, incorporating UPI technical failure logs, RBI 2FA/AFA liability mandates, and serial-disputer bank policies.
+1. **The Micro-Ticket Trap:** Fighting a ₹300 dispute with a 90% win probability yields an expected recovery of ₹270. Spending ₹500 to recover ₹270 guarantees a net loss of -₹230. 
 
-* **Cost-Sensitive ML:** Uses a Random Forest classifier to predict win probability, optimizing strictly for False-Positive labor waste vs. False-Negative lost revenue.
+2. **The High-Ticket Blindspot:** Naive models discard ₹4,000 disputes with a 40% win probability as "likely losses." But structurally, the expected recovery is ₹1,600—yielding a highly profitable net return of +₹1,100.
 
-* **LLM Auto-Responder Pipeline:** Generates structured JSON payloads for high-ROI cases, providing a strict extraction template for LLMs to generate formal Bank Representment Letters without hallucinating ARNs or tracking numbers.
+---
 
-## 📊 Honest Business Metrics (Test Set)
+## 💡 The Solution: Economic Expected Value Gating
 
-Compared to a baseline policy of disputing all chargebacks blindly, RazorGuard's cost-optimal threshold delivered the following on a 200-case test set:
+RazorGuard decouples statistical prediction from the economic decision utilizing a two-stage pipeline:
 
-* **False Positive Labor Waste:** ₹28,500
+1. **Machine Learning Classifier:** Evaluates evidence (2FA status, Proof of Delivery, Payment Rail) to predict the strict win probability ($P_{win}$).
 
-* **False Negative Lost Revenue:** ₹23,159
+2. **Deterministic Financial Engine:** Computes the expected monetary value (EMV).
 
-* **Net Financial Savings:** ₹6,340.93
+**The Golden Rule:** Representment is only triggered when `Expected Recovery > ₹500`. If a dispute fails to clear this operational labor threshold, it is automatically conceded to protect merchant margins.
+
+---
+
+## 🛠️ Technical Stack & Architecture
+
+| Component | Technology Used | Purpose |
+
+| :--- | :--- | :--- |
+
+| **Frontend / UI** | Streamlit | Interactive web dashboard for risk analysts |
+
+| **Backend Core** | Python 3 | Core application routing and data logic |
+
+| **Machine Learning** | Scikit-Learn | Training the Random Forest classifier |
+
+| **Data Processing** | Pandas & NumPy | Expected Value (EMV) financial calculations |
+
+| **Visualizations** | Plotly Express | Rendering dynamic feature importance charts |
+
+| **Compliance** | Deterministic JSON | Mapping data to RBI-compliant rebuttal letters safely |
+
+---
+
+## 📊 Dashboard Visuals & Unit Economics
+
+### 1. Actionable Dispute Queue
+
+The system filters incoming disputes and prioritizes them strictly by Expected ROI, discarding margin-burning cases.
+
+![Actionable Dispute Queue](dashboard.jpg)
+
+### 2. Honest Unit Economics
+
+RazorGuard tracks its own financial performance, actively calculating Wasted Labor Cost (False Positives), Lost Recoverable Revenue (False Negatives), and Total Net Financial Savings.
+
+![Unit Economics Breakdown](image_5f0520.jpg)
+
+### 3. Zero-Hallucination Rebuttal Generator 
+
+Open-ended LLMs cannot be safely deployed for banking arbitration due to the severe regulatory risk of hallucinating data. RazorGuard utilizes **Deterministic Template Injection** to map strictly verified database variables directly into an RBI-compliant representment letter.
+
+![Bank Rebuttal Generator](letter.jpg)
+
+---
 
 ## 🚀 How to Run Locally
 
-1. **Clone the repository:**
+1. Clone the repository:
 
    ```bash
 
    git clone [[https://github.com/tejistaram/razorguard-chargeback-triage.git](https://github.com/tejistaram/razorguard-chargeback-triage.git)](https://github.com/tejistaram/razorguard-chargeback-triage.git](https://github.com/tejistaram/razorguard-chargeback-triage.git))
 
    cd razorguard-chargeback-triage
+
+Compared to a baseline policy of disputing all chargebacks blindly, RazorGuard's cost-optimal threshold delivered the following on a 200-case test set:
+
+- **False Positive Labor Waste:** ₹28,500
+- **False Negative Lost Revenue:** ₹23,159
+- **Net Financial Savings:** ₹6,340.93
+
+
+
+## 🚀 How to Run Locally
+
+1. **Clone the repository:**
+  ```bash
+
+   git clone [[https://github.com/tejistaram/razorguard-chargeback-triage.git](https://github.com/tejistaram/razorguard-chargeback-triage.git)](https://github.com/tejistaram/razorguard-chargeback-triage.git](https://github.com/tejistaram/razorguard-chargeback-triage.git))
+
+   cd razorguard-chargeback-triage
+  ```
+
